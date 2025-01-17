@@ -29,7 +29,7 @@ nav {
 
 nav .logo {
     font-size: 18px;
-    font-weight: bold;
+    font-family:Georgia, 'Times New Roman', Times, serif;
     color: #ff6d04;    text-transform: uppercase; 
 }
 
