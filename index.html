@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDC Auditions Invitation</title>
     <style>
-       
         * {
             margin: 0;
             padding: 0;
@@ -14,8 +13,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, #19046c, #3b5998); /* Gradient background */
-            color: #ffffff; /* White text */
+            background: linear-gradient(135deg, #121212, #1d1d2c);
+            color: #d6d6d6;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -28,15 +27,16 @@
         h1 {
             font-size: 48px;
             margin-bottom: 20px;
-            background: -webkit-linear-gradient(#f9d423, #ff4e50); /* Gradient text */
+            background: -webkit-linear-gradient(#ff9e80, #ff6e40);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 5px #ff6e40;
         }
 
         p {
             font-size: 20px;
             margin-bottom: 30px;
-            color: #e0e0e0;
+            color: #cfcfcf;
         }
 
         a {
@@ -47,31 +47,80 @@
             font-weight: bold;
             color: #ffffff;
             text-decoration: none;
-            border-radius: 50px; /* Makes the buttons rounded */
-            background: linear-gradient(135deg, #007BFF, #0056b3); /* Gradient button */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Button shadow */
+            border-radius: 50px;
+            background: linear-gradient(135deg, #556cd6, #2e4db7);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
         a:hover {
-            transform: translateY(-5px); /* Button lift on hover */
+            transform: translateY(-5px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #0056b3, #003f7f); /* Darker gradient on hover */
+            background: linear-gradient(135deg, #2e4db7, #1c3280);
         }
 
         hr {
             width: 50%;
             margin: 30px 0;
             border: 0;
-            border-top: 2px dashed #ffffff;
+            border-top: 2px dashed #808080;
+        }
+
+        #clickCounter {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ffa07a;
+        }
+
+        .cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 158, 128, 0.7);
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
     <h1>Welcome to EDC Auditions 2025</h1>
     <p>Join us for an exciting journey of innovation and entrepreneurship.<br>Choose an option below to proceed.</p>
-    <a href="login.html">Login Page</a>
+    <a id="login" href="login.html">Login Page</a>
     <hr>
-    <a href="sighup.html">Sign Up Page</a>
+    <a id="signup" href="sighup.html">Sign Up Page</a>
+    <div id="clickCounter">Button Clicks: 0</div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        let clickCount = 0;
+
+        function updateClickCounter() {
+            clickCount++;
+            document.getElementById('clickCounter').innerText = `Button Clicks: ${clickCount}`;
+        }
+
+        document.getElementById('login').addEventListener('click', updateClickCounter);
+        document.getElementById('signup').addEventListener('click', updateClickCounter);
+
+        const cursor = document.getElementById('cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.top = `${e.clientY}px`;
+            cursor.style.left = `${e.clientX}px`;
+        });
+
+        document.addEventListener('click', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+            setTimeout(() => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 200);
+        });
+    </script>
 </body>
 </html>
